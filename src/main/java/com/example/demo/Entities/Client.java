@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 public class Client implements Serializable{
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idClient")
 	long idClient;
 	@Column(length = 64)

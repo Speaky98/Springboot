@@ -1,10 +1,12 @@
 package com.example.demo.tn.esprit.spring.service;
 
+import com.example.demo.Entities.Fournisseur;
 import com.example.demo.Entities.Produit;
 import com.example.demo.Entities.Rayon;
 import com.example.demo.tn.esprit.spring.repository.ProduitRepository;
 import com.example.demo.tn.esprit.spring.repository.RayonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,5 +51,12 @@ public class RayonServiceImpl implements RayonService{
     @Override
     public Rayon retrieveRayon(Long id) {
         return this.rayonRepository.findById(id).get();
+    }
+
+    @Scheduled(cron = "*/5 * * * * *")
+    public void reset_value(){
+        List<Rayon> check_list= (List<Rayon>) this.rayonRepository.findAll();
+        if(check_list.size()==0)
+            this.rayonRepository.reset_auto_increment();
     }
 }

@@ -1,24 +1,26 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entities.Fournisseur;
 import com.example.demo.Entities.Rayon;
+import com.example.demo.tn.esprit.spring.repository.RayonRepository;
 import com.example.demo.tn.esprit.spring.service.RayonService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @Slf4j
 @RestController
 public class RayonController {
     @Autowired
     RayonService rayonService;
+    @Autowired
+    RayonRepository rayonRepository;
 
     @RequestMapping(value = "/Rayon",method = RequestMethod.POST,produces="application/json", consumes="application/json")
     public Rayon retrieveRayon(@RequestBody String json) throws JSONException {
@@ -44,10 +46,14 @@ public class RayonController {
 
     }
 
-    @RequestMapping(value = "/Rayon/Delete",method = RequestMethod.DELETE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/Rayon/Delete",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void Delete(@RequestBody Rayon rayon){
         this.rayonService.deleteRayon(rayon.getIdRayon());
-
+        if(this.rayonService.retrieveAllRayons().size()!=0) {
+            long max = this.rayonService.retrieveAllRayons().stream().mapToLong(Rayon::getIdRayon).max().getAsLong();
+            max += 1;
+            this.rayonRepository.fix_auto_increment((int) max);
+        }
     }
 
 

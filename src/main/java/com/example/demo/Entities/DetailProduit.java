@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 //		property = "idDetailProduit")
 public class DetailProduit implements Serializable {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idDetailProduit")
 	long idDetailProduit;
 	Date dateCreation;

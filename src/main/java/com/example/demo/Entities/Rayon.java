@@ -21,7 +21,7 @@ import javax.persistence.*;
 //		property = "idRayon")
 public class Rayon implements Serializable {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idRayon")
 	@NonNull
 	long idRayon;

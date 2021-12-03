@@ -20,7 +20,7 @@ import javax.persistence.*;
 //		property = "idStock")
 public class Stock implements Serializable {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idStock")
 	long idStock;
 	int qte;

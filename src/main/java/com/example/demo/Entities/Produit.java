@@ -15,7 +15,7 @@ import javax.persistence.*;
 //		property = "idProduit")
 public class Produit implements Serializable {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idProduit")
 	long idProduit;
 	@Column(length = 64)
@@ -25,31 +25,33 @@ public class Produit implements Serializable {
 	float prixUnitaire;
 
 	@OneToMany(mappedBy="produit_d_facture",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//	@JsonIgnore
+	@JsonIgnore
 //	@JsonBackReference
 //	@JsonManagedReference
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<detailFacture> set_d_factures=new HashSet<detailFacture>();
 
 	@OneToOne(mappedBy="produit",fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
-//	@JsonIgnore
-	@JsonManagedReference
+	@JsonIgnore
+//	@JsonManagedReference
 	DetailProduit detailProduit;
 
 	@ManyToOne
-	@JsonIgnore
+//	@JsonIgnore
 //	@JsonBackReference
 //    @JsonManagedReference
 	@JoinColumn(name="FK_RayonsP_ID")
 	Rayon rayons;
 
 	@ManyToOne
+	@JsonIgnore
 //	@JsonBackReference
 //    @JsonManagedReference
 	@JoinColumn(name="FK_StocksP_ID")
 	Stock stocks;
 
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
 	@JoinTable(name = "Produit_Founisseur",
 	joinColumns={@JoinColumn(name="Produit_ID")},
 	inverseJoinColumns={@JoinColumn(name ="Fournisseur_ID")})

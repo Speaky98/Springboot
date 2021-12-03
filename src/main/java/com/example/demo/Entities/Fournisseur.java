@@ -10,13 +10,15 @@ import javax.persistence.Id;
 @Entity
 public class Fournisseur implements Serializable {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idFournisseur")
 	long idFournisseur;
 	@Column(length = 64)
 	String code;
 	@Column(length = 64)
 	String  libelle;
+	@Column(length = 128,nullable = true)
+	String  avatar;
 	public Fournisseur() {}
 	
 	public long getIdFournisseur() {
@@ -43,6 +45,14 @@ public class Fournisseur implements Serializable {
 		this.libelle = libelle;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -59,9 +69,7 @@ public class Fournisseur implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Fournisseur other = (Fournisseur) obj;
-		if (idFournisseur != other.idFournisseur)
-			return false;
-		return true;
+		return idFournisseur == other.idFournisseur;
 	}
 	
 }

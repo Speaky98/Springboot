@@ -18,7 +18,7 @@ import javax.persistence.*;
 //		property = "idDetailFacture")
 public class detailFacture implements Serializable {
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idDetailFacture")
 	long idDetailFacture;
 	int qte;

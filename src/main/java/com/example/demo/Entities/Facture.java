@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 public class Facture implements Serializable{
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
+	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column(name="idFacture")
 	long idFacture;
 	float montantRemise;
