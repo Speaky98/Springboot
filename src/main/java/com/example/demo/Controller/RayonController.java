@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entities.Fournisseur;
 import com.example.demo.Entities.Rayon;
+import com.example.demo.tn.esprit.spring.repository.ProduitRepository;
 import com.example.demo.tn.esprit.spring.repository.RayonRepository;
 import com.example.demo.tn.esprit.spring.service.RayonService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,8 @@ public class RayonController {
     RayonService rayonService;
     @Autowired
     RayonRepository rayonRepository;
+    @Autowired
+    ProduitRepository produitRepository;
 
     @RequestMapping(value = "/Rayon",method = RequestMethod.POST,produces="application/json", consumes="application/json")
     public Rayon retrieveRayon(@RequestBody String json) throws JSONException {
@@ -48,6 +51,14 @@ public class RayonController {
 
     @RequestMapping(value = "/Rayon/Delete",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void Delete(@RequestBody Rayon rayon){
+        this.rayonService.retrieveAllRayons().forEach(ray -> {
+            ray.getSet_r_produits().forEach(produit -> {
+                if(produit.getRayons().getIdRayon()==rayon.getIdRayon()) {
+                    produit.setRayons(null);
+                    produitRepository.save(produit);
+                }
+            });
+        });
         this.rayonService.deleteRayon(rayon.getIdRayon());
         if(this.rayonService.retrieveAllRayons().size()!=0) {
             long max = this.rayonService.retrieveAllRayons().stream().mapToLong(Rayon::getIdRayon).max().getAsLong();

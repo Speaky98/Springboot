@@ -33,7 +33,7 @@ public class Rayon implements Serializable {
 	String  libelle;
 
 	@OneToMany(mappedBy="rayons",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JsonBackReference
+	@JsonManagedReference
 	//@JsonIgnore
 	//@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<Produit> set_r_produits=new HashSet<Produit>();

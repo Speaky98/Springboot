@@ -38,7 +38,7 @@ public class Produit implements Serializable {
 
 	@ManyToOne
 //	@JsonIgnore
-//	@JsonBackReference
+	@JsonBackReference
 //    @JsonManagedReference
 	@JoinColumn(name="FK_RayonsP_ID")
 	Rayon rayons;

@@ -45,13 +45,13 @@ public class RayonTests {
     void DeleteRayon() {
         this.rayonService.retrieveAllRayons().forEach(rayon -> {
             rayon.getSet_r_produits().forEach(produit -> {
-                if(rayon.getIdRayon()==1) {
+                if(produit.getRayons().getIdRayon()==7) {
                     produit.setRayons(null);
                     produitRepository.save(produit);
                 }
             });
         });
-        rayonService.deleteRayon(1L);
+        rayonService.deleteRayon(7L);
 
     }
 }

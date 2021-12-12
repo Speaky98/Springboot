@@ -17,10 +17,41 @@ public class Fournisseur implements Serializable {
 	String code;
 	@Column(length = 64)
 	String  libelle;
-	@Column(length = 128,nullable = true)
+	@Column(length = 128)
 	String  avatar;
+	@Column(length = 128)
+	String  localisation_fournisseur;
+	@Column(length = 128,nullable = true)
+	String  longitude_fournisseur;
+	@Column(length = 128,nullable = true)
+	String  latitude_fournisseur;
+
 	public Fournisseur() {}
-	
+
+	public String getLocalisation_fournisseur() {
+		return localisation_fournisseur;
+	}
+
+	public void setLocalisation_fournisseur(String localisation_fournisseur) {
+		this.localisation_fournisseur = localisation_fournisseur;
+	}
+
+	public String getLongitude_fournisseur() {
+		return longitude_fournisseur;
+	}
+
+	public void setLongitude_fournisseur(String longitude_fournisseur) {
+		this.longitude_fournisseur = longitude_fournisseur;
+	}
+
+	public String getLatitude_fournisseur() {
+		return latitude_fournisseur;
+	}
+
+	public void setLatitude_fournisseur(String latitude_fournisseur) {
+		this.latitude_fournisseur = latitude_fournisseur;
+	}
+
 	public long getIdFournisseur() {
 		return idFournisseur;
 	}
